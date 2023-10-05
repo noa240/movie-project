@@ -55,6 +55,12 @@ header a:hover{
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+.container:hover{
+    background-color: #ccc;
+    size: 150%;
+    font-weight: bold;
+    font-size: large;
+}
 
 
 form label {

@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styleAbout.css">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+     <link rel="stylesheet" href="styleAbout.css">
+    <title>About Me - Movie Night</title>
 </head>
 <body>
     <header>
@@ -13,10 +13,69 @@
         <a href="singleMovie.html">Single Movie</a>
         <a href="about.html">About</a>
         <a href="search.html">Search</a>
-       
+
     </header>
-    <main>
-        
-    </main>
+    
+    <section id="about-me">
+        <div class="container">
+            <h2>About Me</h2>
+            <p>
+                Hi there! I'm Noa, a 22-year-old aspiring web developer currently learning the ropes of full-stack development in a developer's bootcamp.
+            </p>
+            <p>
+                I'm passionate about both technology and movies. This website is my way of combining these interests to share my love for great films with fellow enthusiasts.
+            </p>
+            <p>
+                Join me on this cinematic journey as we explore the world of movies together!
+            </p>
+        </div>
+    </section>
+    
+    <section id="why-movies">
+        <div class="container">
+            <h2>Why Movies Are Great</h2>
+            <p>
+                Movies have the power to transport us to different worlds, evoke emotions, and tell stories that resonate with our own lives. They are a source of inspiration, entertainment, and a window into diverse cultures and perspectives.
+            </p>
+            <p>
+                Whether you're into action, drama, comedy, or sci-fi, there's a movie out there for everyone. Let's celebrate the magic of cinema together!
+            </p>
+        </div>
+    </section>
+    
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <p>
+                Have a question or want to chat about movies? Feel free to reach out to me using the form below.
+            </p>
+            <form action="submit_contact_form.php" method="POST">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+                
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </section>
+    
+    <section id="social-media">
+        <div class="container">
+            <h2>Connect with Me</h2>
+            <ul>
+                 <li><button><a href="https://github.com/noa240">GitHub</a></button></li>
+                <li><button><a href="https://instagram.com/noa.zelinger?igshid=OGQ5ZDc2ODk2ZA==">Instagram</a></button></li>
+            </ul>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2023 Movie Night</p>
+    </footer>
 </body>
 </html>

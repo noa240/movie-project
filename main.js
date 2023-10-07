@@ -9,8 +9,31 @@ const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 const TRENDING_DAY = BASE_URL + '/trending/movie/day?' + API_KEY;
 const TRENDING_WEEK = BASE_URL + '/trending/movie/week?' + API_KEY;
+const favoriteArray = [];
+let currentPage = 1;
 
-let currentPage = 1; 
+main.addEventListener('click', function (e) {
+  if (e.target.classList.contains('likeBtn')) {
+    const movieId = e.target.dataset.movieId;
+    const likedMovie = favoriteArray.find(movie => movie.id == movieId);
+    if (likedMovie) {
+      // Remove the liked movie from favorites
+      const index = favoriteArray.indexOf(likedMovie);
+      if (index > -1) {
+        favoriteArray.splice(index, 1);
+      }
+    } else {
+      // Find the movie in the displayed list
+      const movie = displayedMovies.find(movie => movie.id == movieId);
+      if (movie) {
+        favoriteArray.push(movie);
+      }
+    }
+    localStorage.setItem('favorites', JSON.stringify(favoriteArray));
+  }
+});
+
+let displayedMovies = []; // Store the currently displayed movies
 
 function updateAPIURL(page) {
   return `${BASE_URL}/discover/movie?sort_by=popularity.desc&${API_KEY}&page=${page}`;
@@ -21,7 +44,8 @@ function getMovies(url) {
     .then((response) => response.json())
     .then((data) => {
       console.log(data.results);
-      showMovies(data.results);
+      displayedMovies = data.results;
+      showMovies(displayedMovies);
     });
 }
 
@@ -30,7 +54,8 @@ function getToday() {
     .then((response) => response.json())
     .then((data) => {
       console.log(data.results);
-      showMovies(data.results);
+      displayedMovies = data.results;
+      showMovies(displayedMovies);
     });
 }
 
@@ -39,10 +64,10 @@ function getThisWeek() {
     .then((response) => response.json())
     .then((data) => {
       console.log(data.results);
-      showMovies(data.results);
+      displayedMovies = data.results;
+      showMovies(displayedMovies);
     });
 }
-
 
 function nextPage() {
   currentPage++;
@@ -58,19 +83,13 @@ function prevPage() {
   }
 }
 
-getMovies(updateAPIURL(currentPage)); 
-
-dayBtn.addEventListener('click', getToday);
-weekBtn.addEventListener('click', getThisWeek);
-nextBtn.addEventListener('click', nextPage);
-prevBtn.addEventListener('click', prevPage);
-
 function showMovies(data) {
   main.innerHTML = '';
   data.forEach((movie) => {
-    const { title, poster_path, vote_average, overview } = movie;
+    const { id, title, poster_path, vote_average, overview } = movie;
     const movieEl = document.createElement('div');
     movieEl.classList.add('movie');
+    const isLiked = favoriteArray.find(favorite => favorite.id === id);
     movieEl.innerHTML = `<img src="${IMG_URL + poster_path}" alt="${title} Poster">
     <div class="movie-info">
         <h3>${title}</h3>
@@ -79,6 +98,7 @@ function showMovies(data) {
     <div class="overview">
         <h3>Overview</h3>
         ${overview}
+        <span class="like"><button class="likeBtn" data-movie-id="${id}">${isLiked ? 'Unlike' : 'Like'}</button></span>
     </div>`;
     main.appendChild(movieEl);
   });
@@ -93,6 +113,15 @@ function getColor(vote) {
     return 'red';
   }
 }
+
+// Initial load of movies
+getMovies(updateAPIURL(currentPage));
+
+dayBtn.addEventListener('click', getToday);
+weekBtn.addEventListener('click', getThisWeek);
+nextBtn.addEventListener('click', nextPage);
+prevBtn.addEventListener('click', prevPage);
+
 
 
 

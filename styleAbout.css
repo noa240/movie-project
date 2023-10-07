@@ -88,6 +88,9 @@ button{
     border-radius: 5px;
     cursor: pointer;
 }
+button:hover{
+    border: 3px solid black;
+}
 
 #social-media ul {
     list-style: none;

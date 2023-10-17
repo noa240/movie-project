@@ -17,13 +17,11 @@ main.addEventListener('click', function (e) {
     const movieId = e.target.dataset.movieId;
     const likedMovie = favoriteArray.find(movie => movie.id == movieId);
     if (likedMovie) {
-      // Remove the liked movie from favorites
       const index = favoriteArray.indexOf(likedMovie);
       if (index > -1) {
         favoriteArray.splice(index, 1);
       }
     } else {
-      // Find the movie in the displayed list
       const movie = displayedMovies.find(movie => movie.id == movieId);
       if (movie) {
         favoriteArray.push(movie);
@@ -33,8 +31,7 @@ main.addEventListener('click', function (e) {
   }
 });
 
-let displayedMovies = []; // Store the currently displayed movies
-
+let displayedMovies = []; 
 function updateAPIURL(page) {
   return `${BASE_URL}/discover/movie?sort_by=popularity.desc&${API_KEY}&page=${page}`;
 }
